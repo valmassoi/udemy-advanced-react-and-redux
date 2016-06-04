@@ -5,11 +5,13 @@ const morgan = require('morgan')// middleware (any incoming req)
 const app = express()
 const router = require('./router')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27018/data'
 mongoose.connect(dbUrl)
 
 app.use(morgan('combined')) // a loging framework
+app.use(cors())
 app.use(bodyParser.json({ type: '*/*' })) // any req will be parsed as json (not good if you have non json req)
 router(app)
 
